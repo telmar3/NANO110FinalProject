@@ -1,0 +1,277 @@
+LAMMPS (3 Nov 2022)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+units                real
+atom_style           full
+boundary             p p p
+dielectric           1
+special_bonds        lj/coul 0.0 0.0 1.0
+
+pair_style           lj/charmm/coul/charmm 13 14.00000
+bond_style           none
+angle_style          none
+dihedral_style       none
+improper_style       none
+kspace_style         none
+
+read_data            data.au_pillar
+Reading data file ...
+  orthogonal box = (-13.016965 -5.290265 -3.867165) to (5.942665 3.635365 3.930165)
+  4 by 2 by 2 MPI processor grid
+  reading atoms ...
+  25 atoms
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        1       
+  special bond factors coul:  0        0        1       
+     0 = max # of 1-2 neighbors
+     0 = max # of 1-3 neighbors
+     1 = max # of special neighbors
+  special bonds CPU = 0.001 seconds
+  read_data CPU = 0.011 seconds
+
+
+
+pair_modify          mix geometric
+neighbor             2.0 multi
+neigh_modify         every 2 delay 4 check yes
+thermo_style         multi
+thermo_modify        line multi format float %14.6f flush yes
+variable             input string in.au_pillar
+variable             sname string au_pillar
+
+
+timestep             1
+
+print                .
+.
+print                ==========================================
+==========================================
+print                "500 steps CG Minimization"
+500 steps CG Minimization
+print                ==========================================
+==========================================
+print                .
+.
+
+dump                 1 all custom 25 ${sname}.min.lammps id type xu yu zu vx vy vz
+dump                 1 all custom 25 au_pillar.min.lammps id type xu yu zu vx vy vz
+thermo               10
+min_style            sd
+minimize             1.0e-4 1.0e-4 500 5000
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+
+- neighbor multi command: doi:10.1016/j.cpc.2008.03.005, doi:10.1007/s40571-020-00361-2
+
+@Article{Intveld08,
+ author =  {in 't Veld, P. J. and S. J.~Plimpton and G. S. Grest},
+ title =   {Accurate and Efficient Methods for Modeling Colloidal
+            Mixtures in an Explicit Solvent using Molecular Dynamics},
+ journal = {Comput.\ Phys.\ Commut.},
+ year =    2008,
+ volume =  179,
+ pages =   {320--329}
+}
+
+@article{Shire2020,
+ author = {Shire, Tom and Hanley, Kevin J. and Stratford, Kevin},
+ title = {{DEM} Simulations of Polydisperse Media: Efficient Contact
+          Detection Applied to Investigate the Quasi-Static Limit},
+ journal = {Computational Particle Mechanics},
+ year = {2020}
+}
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Switching to 'neigh_modify every 1 delay 0 check yes' setting during minimization
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 16
+  ghost atom cutoff = 16
+  binsize = 8, bins = 3 2 1
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/charmm/coul/charmm, perpetual
+      attributes: half, newton on
+      pair build: half/multi/newton
+      stencil: half/multi/3d
+      bin: multi
+Per MPI rank memory allocation (min/avg/max) = 7.336 | 8.27 | 8.332 Mbytes
+------------ Step              0 ----- CPU =            0 (sec) -------------
+TotEng   =      -4.115775 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.115775 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.115775 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =     -66.086051
+------------ Step             10 ----- CPU =  0.002561554 (sec) -------------
+TotEng   =      -4.171952 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.171952 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.171952 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.734790
+------------ Step             20 ----- CPU =  0.004872166 (sec) -------------
+TotEng   =      -4.181423 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.181423 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.181423 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.523503
+------------ Step             30 ----- CPU =   0.00687079 (sec) -------------
+TotEng   =      -4.187319 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.187319 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.187319 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.123639
+------------ Step             40 ----- CPU =  0.008786858 (sec) -------------
+TotEng   =      -4.192320 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.192320 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.192320 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.159612
+------------ Step             50 ----- CPU =    0.0106206 (sec) -------------
+TotEng   =      -4.196909 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.196909 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.196909 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.278286
+------------ Step             53 ----- CPU =   0.01123485 (sec) -------------
+TotEng   =      -4.198174 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.198174 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.198174 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.186487
+Loop time of 0.0112548 on 16 procs for 53 steps with 25 atoms
+
+90.2% CPU use with 16 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -4.11577522631145   -4.1977580340259  -4.19817425909617
+  Force two-norm initial, final = 0.28517096 0.035593683
+  Force max component initial, final = 0.15709924 0.018956412
+  Final line search alpha, max atom move = 1 0.018956412
+  Iterations, force evaluations = 53 92
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 3.1566e-05 | 0.00042023 | 0.0006268  |   0.0 |  3.73
+Bond    | 3.317e-06  | 3.8037e-06 | 9.316e-06  |   0.0 |  0.03
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.0084575  | 0.0087641  | 0.0090972  |   0.2 | 77.87
+Output  | 0.0003205  | 0.00033745 | 0.0003905  |   0.0 |  3.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.001729   |            |       | 15.36
+
+Nlocal:         1.5625 ave           3 max           0 min
+Histogram: 1 0 0 6 0 0 8 0 0 1
+Nghost:        904.312 ave         920 max         884 min
+Histogram: 1 2 1 2 1 1 2 1 1 4
+Neighs:         251.75 ave         398 max           0 min
+Histogram: 1 0 0 4 2 0 0 3 3 3
+
+Total # of neighbors = 4028
+Ave neighs/atom = 161.12
+Ave special neighs/atom = 0
+Neighbor list builds = 0
+Dangerous builds = 0
+min_style            cg
+minimize             1.0e-4 1.0e-4 500 5000
+Switching to 'neigh_modify every 1 delay 0 check yes' setting during minimization
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 7.336 | 8.27 | 8.332 Mbytes
+------------ Step             53 ----- CPU =            0 (sec) -------------
+TotEng   =      -4.198174 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.198174 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.198174 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.186487
+------------ Step             54 ----- CPU =  0.000526581 (sec) -------------
+TotEng   =      -4.198576 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.198576 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.198576 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.312950
+Loop time of 0.000543978 on 16 procs for 1 steps with 25 atoms
+
+49.3% CPU use with 16 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -4.19817425909617  -4.19817425909617  -4.19857569604449
+  Force two-norm initial, final = 0.035593683 0.028175147
+  Force max component initial, final = 0.018956412 0.010705335
+  Final line search alpha, max atom move = 1 0.010705335
+  Iterations, force evaluations = 1 2
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.584e-06  | 1.6188e-05 | 3.0738e-05 |   0.0 |  2.98
+Bond    | 1.3e-07    | 1.45e-07   | 1.6e-07    |   0.0 |  0.03
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00025446 | 0.00026645 | 0.00028219 |   0.0 | 48.98
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.0002612  |            |       | 48.02
+
+Nlocal:         1.5625 ave           3 max           0 min
+Histogram: 1 0 0 7 0 0 6 0 0 2
+Nghost:        899.688 ave         922 max         868 min
+Histogram: 2 0 2 0 2 1 1 3 3 2
+Neighs:        251.625 ave         571 max           0 min
+Histogram: 1 0 6 1 0 4 3 0 0 1
+
+Total # of neighbors = 4026
+Ave neighs/atom = 161.04
+Ave special neighs/atom = 0
+Neighbor list builds = 0
+Dangerous builds = 0
+#now                 minimize the entire system
+minimize             1.0e-4 1.0e-4 500 5000
+Switching to 'neigh_modify every 1 delay 0 check yes' setting during minimization
+Generated 0 of 0 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 7.336 | 8.27 | 8.332 Mbytes
+------------ Step             54 ----- CPU =            0 (sec) -------------
+TotEng   =      -4.198576 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.198576 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.198576 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.312950
+------------ Step             55 ----- CPU =   0.00038717 (sec) -------------
+TotEng   =      -4.198969 KinEng   =       0.000000 Temp     =       0.000000 
+PotEng   =      -4.198969 E_bond   =       0.000000 E_angle  =       0.000000 
+E_dihed  =       0.000000 E_impro  =       0.000000 E_vdwl   =      -4.198969 
+E_coul   =       0.000000 E_long   =       0.000000 Press    =    -108.202114
+Loop time of 0.000404357 on 16 procs for 1 steps with 25 atoms
+
+90.4% CPU use with 16 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -4.19857569604449  -4.19857569604449  -4.19896860718003
+  Force two-norm initial, final = 0.028175147 0.03528937
+  Force max component initial, final = 0.010705335 0.018975723
+  Final line search alpha, max atom move = 1 0.018975723
+  Iterations, force evaluations = 1 2
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 2.614e-06  | 1.6192e-05 | 3.0737e-05 |   0.0 |  4.00
+Bond    | 1.1e-07    | 1.4213e-07 | 1.72e-07   |   0.0 |  0.04
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00025155 | 0.00026299 | 0.00027676 |   0.0 | 65.04
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.000125   |            |       | 30.92
+
+Nlocal:         1.5625 ave           3 max           0 min
+Histogram: 1 0 0 7 0 0 6 0 0 2
+Nghost:        899.688 ave         922 max         868 min
+Histogram: 2 0 2 0 2 1 1 3 3 2
+Neighs:        251.688 ave         571 max           0 min
+Histogram: 1 0 6 1 0 4 3 0 0 1
+
+Total # of neighbors = 4027
+Ave neighs/atom = 161.08
+Ave special neighs/atom = 0
+Neighbor list builds = 0
+Dangerous builds = 0
+undump               1
+Total wall time: 0:00:00

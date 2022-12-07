@@ -1,0 +1,9 @@
+@<TRIPOS>MOLECULE
+*****
+ 1 0 0 0 0
+SMALL
+GASTEIGER
+
+@<TRIPOS>ATOM
+      1 AU         -3.4754    1.8419    0.0000 Au      1  UNL1        0.0000
+@<TRIPOS>BOND
